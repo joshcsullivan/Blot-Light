@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  {{> head}}
+  <body>
+    {{> header}}
+    <div class="container">
+      <div class="main">
+        <article class="h-entry entry">
+        {{#entry}}
+          <a class="small date left margin u-url" href="{{url}}">
+              <time class="dt-published" datetime="{{#formatDate}} DD MMM YYYY HH:MMz {{/formatDate}}">
+                {{#formatDate}} ddd, D MMM YYYY {{/formatDate}}
+              </time>
+          </a>
+
+          {{#title}}
+            {{#metadata.in-reply-to}}
+            <a class="u-in-reply-to" href="{{metadata.in-reply-to}}" target="_blank" rel="in-reply-to"> 
+              <h1 class="link-title p-name">
+                {{title}}{{^title}}{{summary}}{{/title}} 
+                <span class="icn">→</span>
+              </h1>
+            </a>
+            {{/metadata.in-reply-to}}
+            {{^metadata.in-reply-to}}<h1 class="post-title p-name entry-title"></h1>{{/metadata.in-reply-to}}
+          {{/title}}
+
+          {{#metadata.like-of}}
+            <div class="mf-data p-summary"> <span style="color:#E24E42;">★</span> Liked the post 
+              <a class="u-like-of" href="{{metadata.like-of}}" rel="like-of">
+                {{#metadata.like-of-title}}
+                  {{metadata.like-of-title}}
+                {{/metadata.like-of-title}}
+                {{^metadata.like-of-title}}
+                  {{metadata.like-of}}
+                {{/metadata.like-of-title}}
+              </a>
+            </div>
+          {{/metadata.like-of}}
+
+          {{#metadata.in-reply-to}}
+            {{^title}}
+            <div class="mf-data"> 
+              <i class="fa fa-comments"></i> in reply to
+              <a class="u-in-reply-to" href="{{metadata.in-reply-to}}" rel="in-reply-to">
+                {{#metadata.in-reply-to-title}}
+                  {{metadata.in-reply-to-title}}
+                {{/metadata.in-reply-to-title}}
+                {{^metadata.in-reply-to-title}}
+                  {{metadata.in-reply-to}}
+                {{/metadata.in-reply-to-title}}                
+              </a>
+            </div>
+            {{/title}}
+          {{/metadata.in-reply-to}}
+
+          <div class="e-content">{{{html}}}</div>
+
+          {{#metadata.photo}}
+            <p><img src="{{metadata.photo}}" {{#metadata.photo_alt}}alt="{{metadata.photo_alt}}"{{/metadata.photo_alt}}></p>
+          {{/metadata.photo}}
+
+          {{#tags.length}}
+            {{#tags}}
+            <a class="small tag p-category" href="/tagged/{{slug}}">{{name}}</a>
+            {{/tags}}
+          {{/tags.length}}
+
+          {{#adjacent}}
+          <hr class="full" />
+          {{/adjacent}}
+              
+          <div id="commento"></div>
+          <script src="https://cdn.commento.io/js/commento.js"></script>
+
+          <script data-isso="//isso.joshsullivan.io/"
+            data-isso-require-author="true"
+            data-isso-vote="false"
+            data-isso-reply-notifications="false"
+            data-isso-css="false"
+            src="//isso.joshsullivan.io/js/embed.min.js"></script>
+
+		<section id="isso-thread"></section>
+
+          <div class="post-mentions" id="post-mentions" style="display:none">
+            <ul class="mentions-list" id="mentions-list"></ul>
+          </div>
+
+        {{/entry}}
+        </article>
+         {{> footer}}
+      </div>
+    </div>
+    
+  </body>
+</html>
+
