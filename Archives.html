@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  {{> head}}
+  <body>
+    {{> header}}
+    <div class="container">
+      <div class="main">
+        <h1>Archives</h1>
+        <div>
+          {{#archives}}
+            {{#months}}
+            <h3 class="margin-left" id="{{month}}-{{year}}">{{month}} {{year}}</h3>
+              <ul>
+                {{#entries}}
+                <li type="disc">
+                  <a href="{{url}}"><b>{{#formatDate}}YYYY-MM-DD{{/formatDate}}</b></a>:&nbsp;<b>{{title}}</b>{{^title}}{{summary}}{{/title}}
+                </li>
+                {{/entries}}
+              </ul>
+            {{/months}}
+          {{/archives}}
+        </div>
+        {{> footer}}
+      </div>
+    </div>
+  </body>
+</html>
